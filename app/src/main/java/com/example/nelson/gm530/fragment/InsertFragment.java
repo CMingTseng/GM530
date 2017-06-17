@@ -1,11 +1,10 @@
-package com.example.nelson.gm530;
+package com.example.nelson.gm530.fragment;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -14,23 +13,27 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.nelson.gm530.R;
+import com.example.nelson.gm530.datastructure.Spot;
+import com.example.nelson.gm530.utils.MySQLiteOpenHelper;
+
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
-public class UpdateActivity extends AppCompatActivity {
+public class InsertFragment extends AppCompatActivity {
     private ImageView ivSpot;
     private EditText etName;
     private EditText etWeb;
     private EditText etPhone;
     private EditText etAddress;
     private MySQLiteOpenHelper sqliteHelper;
-    private Spot spot;
+    private byte[] image;
     private static final int REQUEST_TAKE_PICTURE = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.update_activity);
+        setContentView(R.layout.insert_activity);
         if (sqliteHelper == null) {
             sqliteHelper = new MySQLiteOpenHelper(this);
         }
@@ -43,21 +46,6 @@ public class UpdateActivity extends AppCompatActivity {
         etWeb = (EditText) findViewById(R.id.etWeb);
         etPhone = (EditText) findViewById(R.id.etPhone);
         etAddress = (EditText) findViewById(R.id.etAddress);
-
-        int id = getIntent().getExtras().getInt("id");
-        spot = sqliteHelper.findById(id);
-        if (spot == null) {
-            Toast.makeText(this, R.string.msg_NoDataFound,
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Bitmap bitmap = BitmapFactory.decodeByteArray(spot.getImage(), 0,
-                spot.getImage().length);
-        ivSpot.setImageBitmap(bitmap);
-        etName.setText(spot.getName());
-        etWeb.setText(spot.getWeb());
-        etPhone.setText(spot.getPhone());
-        etAddress.setText(spot.getAddress());
     }
 
     public void onTakePictureClick(View view) {
@@ -70,7 +58,7 @@ public class UpdateActivity extends AppCompatActivity {
         }
     }
 
-    public boolean isIntentAvailable(Context context, Intent intent) {
+    private boolean isIntentAvailable(Context context, Intent intent) {
         PackageManager packageManager = context.getPackageManager();
         List<ResolveInfo> list = packageManager.queryIntentActivities(intent,
                 PackageManager.MATCH_DEFAULT_ONLY);
@@ -88,7 +76,7 @@ public class UpdateActivity extends AppCompatActivity {
                         ivSpot.setImageBitmap(bitmap);
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                        spot.setImage(baos.toByteArray());
+                        image = baos.toByteArray();
                     }
                     break;
                 default:
@@ -97,25 +85,26 @@ public class UpdateActivity extends AppCompatActivity {
         }
     }
 
-    public void onUpdateClick(View view) {
-        String name = etName.getText().toString();
-        String web = etWeb.getText().toString();
-        String phone = etPhone.getText().toString();
-        String address = etAddress.getText().toString();
+    public void onInsertClick(View view) {
+        String name = etName.getText().toString().trim();
+        String web = etWeb.getText().toString().trim();
+        String phoneNo = etPhone.getText().toString().trim();
+        String address = etAddress.getText().toString().trim();
         if (name.length() <= 0) {
             Toast.makeText(this, R.string.msg_NameIsInvalid,
                     Toast.LENGTH_SHORT).show();
             return;
         }
 
-        spot.setName(name);
-        spot.setWeb(web);
-        spot.setPhone(phone);
-        spot.setAddress(address);
-
-        int count = sqliteHelper.update(spot);
-        Toast.makeText(this, count + " " + getString(R.string.msg_RowUpdated),
-                Toast.LENGTH_SHORT).show();
+        Spot spot = new Spot(name, web, phoneNo, address, image);
+        long rowId = sqliteHelper.insert(spot);
+        if (rowId != -1) {
+            Toast.makeText(this, R.string.msg_InsertSuccess,
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.msg_InsertFail,
+                    Toast.LENGTH_SHORT).show();
+        }
         finish();
     }
 
@@ -130,4 +119,5 @@ public class UpdateActivity extends AppCompatActivity {
             sqliteHelper.close();
         }
     }
+
 }

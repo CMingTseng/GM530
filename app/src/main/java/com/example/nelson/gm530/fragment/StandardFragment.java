@@ -1,9 +1,11 @@
-package com.example.nelson.gm530;
+package com.example.nelson.gm530.fragment;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-public class standard extends AppCompatActivity {
+import com.example.nelson.gm530.R;
+
+public class StandardFragment extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package com.example.nelson.gm530;
+package com.example.nelson.gm530.datastructure;
 
 public class Spot {
     private int id;

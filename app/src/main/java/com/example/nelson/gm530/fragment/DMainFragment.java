@@ -1,4 +1,4 @@
-package com.example.nelson.gm530;
+package com.example.nelson.gm530.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,9 +15,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nelson.gm530.R;
+import com.example.nelson.gm530.datastructure.Spot;
+import com.example.nelson.gm530.utils.MySQLiteOpenHelper;
+
 import java.util.List;
 
-public class DMainActivity extends AppCompatActivity {
+public class DMainFragment extends AppCompatActivity {
     private MySQLiteOpenHelper sqliteHelper;
     private SpotAdapter spotAdapter;
     private RecyclerView rvSpots;
@@ -58,7 +62,7 @@ public class DMainActivity extends AppCompatActivity {
     }
 
     public void onInsertClick(View view) {
-        Intent intent = new Intent(this, InsertActivity.class);
+        Intent intent = new Intent(this, InsertFragment.class);
         startActivity(intent);
     }
 
@@ -119,7 +123,7 @@ public class DMainActivity extends AppCompatActivity {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, UpdateActivity.class);
+                    Intent intent = new Intent(context, UpdateFragment.class);
                     Bundle bundle = new Bundle();
                     bundle.putInt("id", spot.getId());
                     intent.putExtras(bundle);
