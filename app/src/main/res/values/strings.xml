@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">GM530</string>
+    <string name="title_activity_maps">Map</string>
+
+
+    <string name="text_tvRowCount">(row number/ total rows)</string>
+    <string name="text_Insert">Insert</string>
+    <string name="text_Query">Query</string>
+    <string name="text_Update">Update</string>
+    <string name="text_Delete">Delete</string>
+    <string name="text_TitleSpot">Spots</string>
+    <string name="text_Clear">Clear</string>
+    <string name="text_btNext">Next</string>
+    <string name="text_btBack">Back</string>
+    <string name="text_btCancel">Cancel</string>
+    <string name="btTakePicture">Take Picture</string>
+    <string name="btPickPicture">Pick Picture</string>
+
+    <string name="msg_InsertSuccess">Insert successfully</string>
+    <string name="msg_InsertFail">Insert fail</string>
+    <string name="msg_NameIsInvalid">Spot name is invalid</string>
+    <string name="msg_NoImage">No image</string>
+    <string name="msg_NoDataFound">No data found</string>
+    <string name="msg_RowDeleted">row deleted</string>
+    <string name="msg_RowUpdated">row updated</string>
+    <string name="msg_NoCameraAppsFound">no camera apps found</string>
+    <string name="text_NotGranted">not granted</string>
+    <string name="text_SpotDetail">Spot Detail</string>
+    <string name="text_NoDataFound">no data found</string>
+
+    <string name="airtext">空氣品質指標的定義 空氣品質指標為依據監測資料將當日空氣中臭氧(O3)、
+        細懸浮微粒(PM2.5)、懸浮微粒(PM10)、一氧化碳(CO)、二氧化硫(SO2)及二氧化氮(NO2)濃度等數值，
+        以其對人體健康的影響程度，分別換算出不同污染物之副指標值，再以當日各副指標之最大值為該
+        測站當日之空氣品質指標值(AQI)。</string>
+</resources>

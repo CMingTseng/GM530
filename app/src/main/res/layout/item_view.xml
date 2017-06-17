@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    app:cardBackgroundColor="@color/cardview_light_background"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="6dp">
+
+    <RelativeLayout
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        tools:context="idv.ron.myrecyclerview.MainActivity">
+
+        <ImageView
+            android:id="@+id/ivSpot"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/default_image" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/ivSpot"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            tools:text="中正紀念堂"
+            android:layout_toRightOf="@id/ivSpot"
+            android:layout_marginLeft="12dp" />
+
+        <TextView
+            android:id="@+id/tvPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tvName"
+            android:layout_marginStart="17dp"
+            android:layout_toEndOf="@+id/tvName"
+            android:textColor="#880088"
+            android:textSize="14sp"
+            tools:text="空氣良好"
+            android:layout_marginLeft="17dp"
+            android:layout_toRightOf="@+id/tvName" />
+
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/tvName"
+            android:layout_below="@id/tvName"
+            android:textSize="14sp"
+            tools:text="台北市中正紀念堂"
+            android:layout_alignLeft="@id/tvName" />
+
+        <TextView
+            android:id="@+id/tvWeb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/tvName"
+            android:layout_below="@id/tvAddress"
+            android:textColor="#0000ff"
+            android:textSize="14sp"
+            tools:text="www.abc.com.tw"
+            android:layout_alignLeft="@id/tvName" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
