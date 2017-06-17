@@ -1,10 +1,4 @@
-package com.example.nelson.gm530;
-
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
-import android.util.Log;
+package com.example.nelson.gm530.activity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,18 +7,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
-import java.io.IOException;
+import com.example.nelson.gm530.R;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 

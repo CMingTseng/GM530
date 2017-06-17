@@ -1,10 +1,12 @@
-package com.example.nelson.gm530;
+package com.example.nelson.gm530.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.nelson.gm530.datastructure.Spot;
 
 import java.util.ArrayList;
 import java.util.List;

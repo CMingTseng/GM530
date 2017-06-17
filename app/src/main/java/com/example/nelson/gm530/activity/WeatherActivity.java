@@ -1,13 +1,14 @@
-package com.example.nelson.gm530;
+package com.example.nelson.gm530.activity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import com.example.nelson.gm530.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,20 +25,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AirResult extends AppCompatActivity {
-
+public class WeatherActivity extends AppCompatActivity {
     ArrayList<HashMap<String,Object>> list;
     ListView lv ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_air_result);
-
-        lv=(ListView)findViewById(R.id.lv);
+        setContentView(R.layout.activity_weather);
+        lv=(ListView)findViewById(R.id.listview);
         list=new ArrayList<HashMap<String,Object>>();
         NetworkTask newTask=new NetworkTask();
-        newTask.execute("http://opendata.epa.gov.tw/ws/Data/REWXQA/?$orderby=SiteName&$skip=0&$top=1000&format=json");
+        newTask.execute("http://opendata.epa.gov.tw/ws/Data/ATM00698/?$skip=0&$top=1000&format=json");
+
     }
 
 
@@ -49,9 +49,9 @@ public class AirResult extends AppCompatActivity {
         protected void onPreExecute() {
             // TODO Auto-generated method stub
             super.onPreExecute();
-            dialog=new ProgressDialog(AirResult.this);
+            dialog = new ProgressDialog(WeatherActivity.this);
             dialog.setCancelable(false);
-            dialog=ProgressDialog.show(AirResult.this, "連線中", "請稍候");
+            dialog = ProgressDialog.show(WeatherActivity.this, "連線中", "請稍候");
         }
 
         @Override
@@ -83,46 +83,37 @@ public class AirResult extends AppCompatActivity {
 //            Toast.makeText(MainActivity.this, resultString, Toast.LENGTH_LONG).show();
             Log.d("result",resultString);
             try {
-                JSONArray array =new JSONArray(resultString);
-                JSONObject object=array.getJSONObject(0);
-
-                for (int i =0 ; i<array.length();i++)
-                {
-                    JSONObject records=array.getJSONObject(i);
-                    HashMap<String,Object> item=new HashMap<String,Object>();
-                        item.put("County",records.getString("County"));
-                        item.put("City",records.getString("SiteName"));
-                        item.put("MajorPollutant",records.getString("MajorPollutant"));
-                   // if(records.getString("MajorPollutant")=="懸浮微粒") {
-
-
-                //}
-
-
+                JSONArray array=new JSONArray("resultString");
+                JSONObject obj =array.getJSONObject(0);
+                for (int i=0 ;i<array.length();i++){
+                    JSONObject object =array.getJSONObject(i);
+                    HashMap<String,Object> item =new HashMap<>();
+                    item.put("SiteName",object.getString("SiteName"));
+                    item.put("Temperature",object.getString("Temperature"));
+                    item.put("Moisture",object.getString("Moisture"));
+                    item.put("Weather",object.getString("Weather"));
+                    item.put("WindDirection",object.getString("WindDirection"));
+                    //item.put("Data",object.getString("DataCreationDate"));
                     list.add(item);
-
                 }
-                    /*
-                    if(records.getString("MajorPollutant")=="懸浮粒子")
-                    {
-                        item.put("img",R.drawable.sur);
-                    }else {
-                        item.put("img",R.drawable.common_google_signin_btn_icon_disabled);
-                    }
-                    */
-                SimpleAdapter adapter=new SimpleAdapter(
-                        AirResult.this,
+
+                SimpleAdapter sp =new SimpleAdapter(
+                        WeatherActivity.this,
                         list,
-                        R.layout.list_item,
-                        new String[]{"County","City","MajorPollutant"},
-                        new int[]{ R.id.Country, R.id.city, R.id.status}
-                );lv.setAdapter(adapter);
+                        R.layout.wheather_list,
+                        new String[] {"SiteName","Temperature","Moisture","WindDirection","Weather"} ,
+                        new int[] {R.id.text_CName,R.id.text_T,R.id.text_Moisture,R.id.text_WindDirection,R.id.text_Weather}
+                );
+                lv.setAdapter(sp);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
+
         }
 
-    }
 
+
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.nelson.gm530;
+package com.example.nelson.gm530.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.example.nelson.gm530.R;
+import com.example.nelson.gm530.datastructure.Spot;
+import com.example.nelson.gm530.utils.MySQLiteOpenHelper;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
